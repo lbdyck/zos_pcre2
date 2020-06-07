@@ -1,0 +1,82 @@
+PCRE2 version 10.35 2020-05-09
+/-- This set of tests is run only with the 8-bit library. They do not require
+    UTF-8 or Unicode property support. The file starts with all the tests of
+    the POSIX interface, because that is supported only with the 8-bit library.
+    --/
+
+< forbid 8W
+** Invalid pattern delimiter '<' (x4c).
+
+/\h/SI
+** Unrecognized modifier 'S' in 'SI'
+
+/\v/SI
+** Unrecognized modifier 'S' in 'SI'
+
+/\R/SI
+** Unrecognized modifier 'S' in 'SI'
+
+/[\h]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+    >\x05<
+    >\x40<
+    >\x41<
+    >\x15<
+    >\x25<
+    >\x0b<
+    >\x0c<
+    >\x0d<
+
+/[\H]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[^\h]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[\v]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+    >\x05<
+    >\x40<
+    >\x41<
+    >\x15<
+    >\x25<
+    >\x0b<
+    >\x0c<
+    >\x0d<
+
+/[\V]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[\x0a\V]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[\R]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[\s]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[[:space:]]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[\w]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[[:alpha:]]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[a-z]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[A-Z]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[a-zA-Z]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[a-Z]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+
+/[[!xxx!]]/BZ
+** Unrecognized modifier 'Z' in 'BZ'
+

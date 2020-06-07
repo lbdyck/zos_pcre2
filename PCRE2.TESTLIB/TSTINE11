@@ -1,0 +1,18 @@
+
+/-- Of all tests in tstin14, the only ones relevant are those that
+caused some issues. --/
+
+/[\p{L}]/8BM
+
+/[\p{L}]/BM
+
+/[\p{^L}]/BM
+
+/[\P{L}]/BM
+
+/[\P{^L}]/BM
+
+/\p{L}/BM
+
+/\p{L}/B
+

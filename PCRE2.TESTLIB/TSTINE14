@@ -1,0 +1,61 @@
+/-- This set of tests is run only with the 8-bit library. They do not require
+    UTF-8 or Unicode property support. The file starts with all the tests of
+    the POSIX interface, because that is supported only with the 8-bit library.
+    --/
+
+< forbid 8W
+
+/\h/SI
+
+/\v/SI
+
+/\R/SI
+
+/[\h]/BZ
+    >\x05<
+    >\x40<
+    >\x41<
+    >\x15<
+    >\x25<
+    >\x0b<
+    >\x0c<
+    >\x0d<
+
+/[\H]/BZ
+
+/[^\h]/BZ
+
+/[\v]/BZ
+    >\x05<
+    >\x40<
+    >\x41<
+    >\x15<
+    >\x25<
+    >\x0b<
+    >\x0c<
+    >\x0d<
+
+/[\V]/BZ
+
+/[\x0a\V]/BZ
+
+/[\R]/BZ
+
+/[\s]/BZ
+
+/[[:space:]]/BZ
+
+/[\w]/BZ
+
+/[[:alpha:]]/BZ
+
+/[a-z]/BZ
+
+/[A-Z]/BZ
+
+/[a-zA-Z]/BZ
+
+/[a-Z]/BZ
+
+/[[!xxx!]]/BZ
+

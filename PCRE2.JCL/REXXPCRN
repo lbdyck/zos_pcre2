@@ -1,0 +1,56 @@
+//ZATLAS1C JOB (12345678),ZATLAS1,MSGCLASS=H,REGION=0M,
+//        MSGLEVEL=(1,1),CLASS=A,NOTIFY=&SYSUID
+//*******************************************************               00530000
+//DELETE  EXEC PGM=IDCAMS                                               00540000
+//SYSPRINT DD  DUMMY                                                    00550000
+//SYSIN    DD  *                                                        00560000
+ DELETE  (ZATLAS1.REXX.OUTPUTO)                                         00570007
+ DELETE  (ZATLAS1.REXX.OUTPUT1)                                         00571007
+ DELETE  (ZATLAS1.REXX.OUTPUT2)                                         00571007
+ DELETE  (ZATLAS1.REXX.OUTPUT3)                                         00571007
+ SET MAXCC = 0                                                          00580000
+//*******************************************************               00590000
+//CREATE  EXEC PGM=IEFBR14                                              00600000
+//DCBOUTO  DD  DSN=ZATLAS1.REXX.OUTPUTO,                                00610006
+//             DISP=(NEW,CATLG,DELETE),                                 00620000
+//             DCB=(DSORG=PS,RECFM=FB,LRECL=80),                        00630000
+//             UNIT=SYSDA,SPACE=(TRK,(5,5))                             00640000
+//DCBOUT1  DD  DSN=ZATLAS1.REXX.OUTPUT1,                                00610006
+//             DISP=(NEW,CATLG,DELETE),                                 00620000
+//             DCB=(DSORG=PS,RECFM=FB,LRECL=80),                        00630000
+//             UNIT=SYSDA,SPACE=(TRK,(5,5))                             00640000
+//DCBOUT2  DD  DSN=ZATLAS1.REXX.OUTPUT2,                                00650006
+//             DISP=(NEW,CATLG,DELETE),                                 00660006
+//             DCB=(DSORG=PS,RECFM=FB,LRECL=80),                        00670006
+//             UNIT=SYSDA,SPACE=(TRK,(5,5))                             00680006
+//DCBOUT3  DD  DSN=ZATLAS1.REXX.OUTPUT3,                                00650006
+//             DISP=(NEW,CATLG,DELETE),                                 00660006
+//             DCB=(DSORG=PS,RECFM=FB,LRECL=80),                        00670006
+//             UNIT=SYSDA,SPACE=(TRK,(5,5))                             00680006
+//*******************************************************               00690006
+//RUNIT1O EXEC PGM=IRXJCL,PARM='RXPCRE2B',COND=(0,NE)                   00700006
+//STEPLIB  DD  DISP=SHR,DSN=ZATLAS1.PCRE2.LOADLIB                       00730000
+//SYSEXEC  DD  DISP=SHR,DSN=ZATLAS1.PCRE2.CNTLLIB                       00740000
+//SYSIN    DD  *                                                        00750000
+//SYSPRINT DD  SYSOUT=*                                                 00760000
+//SYSTSPRT DD  SYSOUT=*                                                 00770000
+//PCREDUMP DD  DISP=MOD,DSN=ZATLAS1.REXX.OUTPUTO                        00780006
+//*******************************************************               00690006
+//RUNIT2  EXEC PGM=IRXJCL,PARM='RXPCREMB',COND=(0,NE)                   00800006
+//STEPLIB  DD  DISP=SHR,DSN=ZATLAS1.PCRE2.LOADLIB                       00820006
+//         DD  DISP=SHR,DSN=ZATLAS1.PCRE2.LOADLIB                       00830006
+//SYSEXEC  DD  DISP=SHR,DSN=ZATLAS1.PCRE2.CNTLLIB                       00840006
+//SYSIN    DD  *                                                        00850006
+//SYSPRINT DD  SYSOUT=*                                                 00860006
+//SYSTSPRT DD  SYSOUT=*                                                 00870006
+//PCREDUMP DD  DISP=MOD,DSN=ZATLAS1.REXX.OUTPUT2                        00880006
+//*******************************************************               00890006
+//*******************************************************               00890006
+//RUNIT3  EXEC PGM=IRXJCL,PARM='RXPCSUB',COND=(0,NE)                    00800006
+//STEPLIB  DD  DISP=SHR,DSN=ZATLAS1.PCRE2.LOADLIB                       00820006
+//         DD  DISP=SHR,DSN=ZATLAS1.PCRE2.LOADLIB                       00830006
+//SYSEXEC  DD  DISP=SHR,DSN=ZATLAS1.PCRE2.CNTLLIB                       00840006
+//SYSIN    DD  *                                                        00850006
+//SYSPRINT DD  SYSOUT=*                                                 00860006
+//SYSTSPRT DD  SYSOUT=*                                                 00870006
+//PCREDUMP DD  DISP=MOD,DSN=ZATLAS1.REXX.OUTPUT3                        00880006

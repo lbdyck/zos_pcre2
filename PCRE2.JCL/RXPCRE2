@@ -1,0 +1,89 @@
+//ZATLAS1S JOB (12345678),ZATLAS1,MSGCLASS=H,
+//        MSGLEVEL=(1,1),CLASS=A,NOTIFY=&SYSUID
+//*******************************************************               00030000
+//OBJ      EXEC PGM=IEFBR14
+//DDOBJ    DD  DISP=(NEW,PASS),DSN=&&OBJLIB,SPACE=(TRK,(5,5,10)),
+//         UNIT=3390,VOL=SER=VPWRKC,
+//         DCB=(LRECL=80,RECFM=FB,DSORG=PO,BLKSIZE=0)
+//*******************************************************               00210000
+//ASM01  EXEC PGM=ASMA90,PARM='MACHINE(ZS-4)'
+//SYSLIB  DD  DISP=SHR,DSN=ZATLAS1.C14.MACLIB
+//        DD  DISP=SHR,DSN=SYS1.MACLIB
+//        DD  DISP=SHR,DSN=SYS1.MODGEN
+//SYSIN   DD  DISP=SHR,DSN=ZATLAS1.C14.MACLIB(STRINGIT)  <== NOTE LIB   00110000
+//SYSLIN  DD  DSN=&&OBJLIB(STRINGIT),DISP=(OLD,PASS)
+//SYSPRINT DD SYSOUT=*
+//*******************************************************               00210000
+//ASM02 EXEC PGM=ASMA90,PARM='MACHINE(ZS-4)'
+//SYSLIB DD  DISP=SHR,DSN=ZATLAS1.C14.MACLIB
+//       DD  DISP=SHR,DSN=SYS1.MACLIB
+//       DD  DISP=SHR,DSN=SYS1.MODGEN
+//SYSIN  DD  DISP=SHR,DSN=ZATLAS1.C14.MACLIB(TRIMIT)  <== NOTE LIB      00110000
+//SYSLIN DD  DSN=&&OBJLIB(TRIMIT),DISP=(OLD,PASS)
+//SYSPRINT DD SYSOUT=*
+//*******************************************************               00110000
+//ASM1    EXEC PGM=ASMA90,PARM='MACHINE(ZS-4)'                          00040005
+//SYSLIB   DD  DISP=SHR,DSN=ZATLAS1.C14.MACLIB                          00050000
+//         DD  DISP=SHR,DSN=SYS1.MACLIB                                 00060000
+//         DD  DISP=SHR,DSN=SYS1.MODGEN                                 00070000
+//SYSIN    DD  DISP=SHR,DSN=ZATLAS1.PCRE2.ASM(RXPCRE2)                  00080000
+//SYSLIN   DD  DSN=&&OBJLIB(RXPCRE2),DISP=(OLD,PASS)
+//SYSPRINT DD  SYSOUT=*
+//*******************************************************               00110000
+//ASM2    EXEC PGM=ASMA90,PARM='MACHINE(ZS-4)'                          00120005
+//SYSLIB   DD  DISP=SHR,DSN=ZATLAS1.C14.MACLIB                          00130000
+//         DD  DISP=SHR,DSN=SYS1.MACLIB                                 00140000
+//         DD  DISP=SHR,DSN=SYS1.MODGEN                                 00150000
+//SYSIN    DD  DISP=SHR,DSN=ZATLAS1.PCRE2.ASM(RXPCRE2A)                 00160000
+//SYSLIN   DD  DSN=&&OBJLIB(RXPCRE2A),DISP=(OLD,PASS)
+//SYSPRINT DD  SYSOUT=*
+//*******************************************************               00190000
+//ASM4    EXEC PGM=ASMA90,PARM='MACHINE(ZS-4)'                          00200005
+//SYSLIB   DD  DISP=SHR,DSN=ZATLAS1.C14.MACLIB                          00210000
+//         DD  DISP=SHR,DSN=SYS1.MACLIB                                 00220000
+//         DD  DISP=SHR,DSN=SYS1.MODGEN                                 00230000
+//SYSIN    DD  DISP=SHR,DSN=ZATLAS1.PCRE2.ASM(PROCSTEM)                 00240000
+//SYSLIN   DD  DSN=&&OBJLIB(PROCSTEM),DISP=(OLD,PASS)
+//SYSPRINT DD  SYSOUT=*
+//*******************************************************               00270000
+//LINK1   EXEC PGM=HEWL,PARM='CALL,LIST,MAP,XREF,LET',COND=(0,NE)       00280000
+//SYSLIB   DD  DISP=(OLD,PASS),DSN=&&OBJLIB                             00290000
+//SYSLIN   DD  *                                                        00330000
+    INCLUDE SYSLIB(RXPCRE2)                                             00340000
+    ENTRY   RXPCRE2                                                     00350000
+    NAME    RXPCRE2(R)                                                  00360000
+//SYSLMOD  DD  DISP=SHR,DSN=ZATLAS1.PCRE2.LOADLIB(RXPCRE2)              00370003
+//SYSPRINT DD  SYSOUT=*                                                 00380000
+//*******************************************************               00390000
+//LINK3   EXEC PGM=HEWL,PARM='CALL,LIST,MAP,XREF,LET',COND=(0,NE)       00400000
+//SYSLIB   DD  DISP=(OLD,PASS),DSN=&&OBJLIB                             00410000
+//         DD  DISP=SHR,DSN=ZATLAS1.PCRE2.LOADLIB                       00420000
+//         DD  DISP=SHR,DSN=CEE.SCEELKED                                00430000
+//         DD  DISP=SHR,DSN=CEE.SCEESPC                                 00440000
+//SYSLIN   DD  *                                                        00450000
+    INCLUDE SYSLIB(RXPCRE2A)                                            00460000
+    INCLUDE SYSLIB(PCOBAPI2)                                            00470000
+    INCLUDE SYSLIB(PCRZFUNC)                                            00480000
+    ENTRY   RXPCRE2A                                                    00490001
+    NAME    RXPCRE2A(R)                                                 00500001
+//SYSLMOD  DD  DISP=SHR,DSN=ZATLAS1.PCRE2.LOADLIB(RXPCRE2A)             00510000
+//SYSPRINT DD  SYSOUT=*                                                 00520000
+//*******************************************************               00910000
+//ASM     EXEC PGM=ASMA90,PARM='MACHINE(ZS-4)'                          00120005
+//SYSLIB   DD  DISP=SHR,DSN=ZATLAS1.C14.MACLIB                          00210000
+//         DD  DISP=SHR,DSN=ZATLAS1.PCRE2.ASM
+//         DD  DISP=SHR,DSN=SYS1.MACLIB                                 00140000
+//         DD  DISP=SHR,DSN=SYS1.MODGEN                                 00150000
+//SYSIN    DD  DISP=SHR,DSN=ZATLAS1.PCRE2.ASM(RXPCRE2O)                 00240000
+//SYSLIN   DD  DSN=&&OBJLIB(RXPCRE2O),DISP=(OLD,PASS)
+//SYSPRINT DD  SYSOUT=*
+//*******************************************************               00190000
+//LINK    EXEC PGM=HEWL,PARM='CALL,LIST,MAP,XREF,LET',COND=(0,NE)
+//SYSLIB   DD  DISP=(OLD,PASS),DSN=&&OBJLIB                             00410000
+//SYSLIN   DD  *
+    INCLUDE SYSLIB(RXPCRE2O)
+    ENTRY   RXPCRE2O
+    NAME    RXPCRE2O(R)
+//SYSLMOD  DD  DISP=SHR,DSN=ZATLAS1.PCRE2.LOADLIB(RXPCRE2O)             00510000
+//SYSPRINT DD  SYSOUT=*
+//*******************************************************               00190000
