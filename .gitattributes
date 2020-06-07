@@ -27,4 +27,4 @@
 *.xlsm binary
 *.obj binary
 *.bin binary
-PCRE2.LOADLIB/* git-encoding=BINARY zos-working-tree-encoding=BINARY binary
+PCRE2.LOADLIB.XMIT git-encoding=BINARY zos-working-tree-encoding=BINARY binary
